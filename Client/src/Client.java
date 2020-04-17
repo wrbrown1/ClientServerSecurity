@@ -1,21 +1,113 @@
-import javax.swing.*;
-import java.net.*;
+import javax.net.ssl.HandshakeCompletedListener;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.SSLSocket;
 import java.io.*;
-import java.util.Random;
-import java.util.Scanner;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class Client {
 
-    private Socket socket = null;
+    private SSLSocket socket = null;
     private DataInputStream input = null;
     private DataInputStream inputFromServer = null;
     private DataOutputStream output = null;
-    static Scanner scanner = new Scanner(System.in);
-    static JFrame frame = new JFrame("GUI");
+    //static Scanner scanner = new Scanner(System.in);
+    //static JFrame frame = new JFrame("GUI");
 
     public Client(String address, int port) throws IOException{
 
-        socket = new Socket(address, port);
+        socket = new SSLSocket(address, port) {
+            @Override
+            public String[] getSupportedCipherSuites() {
+                return new String[0];
+            }
+
+            @Override
+            public String[] getEnabledCipherSuites() {
+                return new String[0];
+            }
+
+            @Override
+            public void setEnabledCipherSuites(String[] strings) {
+
+            }
+
+            @Override
+            public String[] getSupportedProtocols() {
+                return new String[0];
+            }
+
+            @Override
+            public String[] getEnabledProtocols() {
+                return new String[0];
+            }
+
+            @Override
+            public void setEnabledProtocols(String[] strings) {
+
+            }
+
+            @Override
+            public SSLSession getSession() {
+                return null;
+            }
+
+            @Override
+            public void addHandshakeCompletedListener(HandshakeCompletedListener handshakeCompletedListener) {
+
+            }
+
+            @Override
+            public void removeHandshakeCompletedListener(HandshakeCompletedListener handshakeCompletedListener) {
+
+            }
+
+            @Override
+            public void startHandshake() throws IOException {
+
+            }
+
+            @Override
+            public void setUseClientMode(boolean b) {
+
+            }
+
+            @Override
+            public boolean getUseClientMode() {
+                return false;
+            }
+
+            @Override
+            public void setNeedClientAuth(boolean b) {
+
+            }
+
+            @Override
+            public boolean getNeedClientAuth() {
+                return false;
+            }
+
+            @Override
+            public void setWantClientAuth(boolean b) {
+
+            }
+
+            @Override
+            public boolean getWantClientAuth() {
+                return false;
+            }
+
+            @Override
+            public void setEnableSessionCreation(boolean b) {
+
+            }
+
+            @Override
+            public boolean getEnableSessionCreation() {
+                return false;
+            }
+        };
         input = new DataInputStream(System.in);
         inputFromServer = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
         output = new DataOutputStream(socket.getOutputStream());
@@ -33,8 +125,12 @@ public class Client {
         while(!userInput.equals("Disconnect")){
             serverResponse = Decrypt(inputFromServer.readUTF());
             System.out.println(serverResponse);
-            userInput = Encrypt(input.readLine());
-            output.writeUTF(userInput);
+            userInput = input.readLine();
+            if(serverResponse.equals("Enter your password: ") || serverResponse.equals("Enter the patient's password: ")){
+                output.writeUTF(getMd5(userInput));
+            }else{
+                output.writeUTF(Encrypt(userInput));
+            }
         }
 
         socket.close();
@@ -43,34 +139,34 @@ public class Client {
     }
 
     public static String Encrypt(String string){
-        if(string.equals("") || string == null){
-            return "";
-        }
-        String encryptedString = "";
-        String[] stringArray = string.split("");
-        for(int i = 0; i < stringArray.length; i++){
-            String value = stringArray[i];
-            int charValue = value.charAt(0);
-            String next = String.valueOf((char)(charValue + 1));
-            if(value.equals("z")){
-                next = "a";
-            }else if(value.equals("Z")){
-                next = "A";
-            }else if(value.equals("9")){
-                next = "0";
-            }else if(value.equals("@")){
-                next = "@";
-            }else if(value.equals("/")){
-                next = "/";
-            }else if(value.equals(".")){
-                next = ".";
-            }else if(value.equals("-")){
-                next = "-";
-            }else if(value.equals(",")){
-                next = ",";
+            if(string.equals("") || string == null){
+                return "";
             }
-            encryptedString += next;
-        }
+            String encryptedString = "";
+            String[] stringArray = string.split("");
+            for(int i = 0; i < stringArray.length; i++){
+                String value = stringArray[i];
+                int charValue = value.charAt(0);
+                String next = String.valueOf((char)(charValue + 1));
+                if(value.equals("z")){
+                    next = "a";
+                }else if(value.equals("Z")){
+                    next = "A";
+                }else if(value.equals("9")){
+                    next = "0";
+                }else if(value.equals("@")){
+                    next = "@";
+                }else if(value.equals("/")){
+                    next = "/";
+                }else if(value.equals(".")){
+                    next = ".";
+                }else if(value.equals("-")){
+                    next = "-";
+                }else if(value.equals(",")){
+                    next = ",";
+                }
+                encryptedString += next;
+            }
         return encryptedString;
     }
 
@@ -111,10 +207,30 @@ public class Client {
         String decHandShakeString = Decrypt(handshakeString);
         output.writeUTF(decHandShakeString);
     }
+    public static String getMd5(String input)
+    {
+        try {
+
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] messageDigest = md.digest(input.getBytes());
+            BigInteger no = new BigInteger(1, messageDigest);
+            String hashtext = no.toString(16);
+            while (hashtext.length() < 32) {
+                hashtext = "0" + hashtext;
+            }
+            return hashtext;
+        }
+
+        // For specifying wrong message digest algorithms
+        catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public static void main(String[] args) throws IOException {
-        //System.out.print("Enter the IP addess of the server you wish to connect to: ");
-        //String IP = scanner.next();
-        Client client = new Client("192.168.1.250", 5000);
+        Client client = new Client("192.168.1.205", 5000);
+        //String s = "Test";
+        //System.out.println("Your HashCode Generated by MD5 is: " + getMd5(s));
+        //ed54b2c479f8c85bf0a8aa68b7e75b00
     }
 }

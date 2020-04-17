@@ -1,13 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="65a05886-2a23-4582-80a0-e73517ef70fd" name="Default Changelist" comment="" />
+    <list default="true" id="65a05886-2a23-4582-80a0-e73517ef70fd" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Server/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Client/Client.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Server/out/production/Server/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/out/production/Server/Server.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Server/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/src/Server.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="ProjectId" id="1Zlrs5RJPwM9dp6SaKK4wUBv1Vi" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -16,8 +29,10 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunManager">
     <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
@@ -38,7 +53,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1585424724476</updated>
-      <workItem from="1585424726639" duration="17000" />
+      <workItem from="1585424726639" duration="253000" />
+      <workItem from="1585425145984" duration="1202000" />
+      <workItem from="1585930267472" duration="5258000" />
+      <workItem from="1586029885555" duration="226000" />
+      <workItem from="1587090814004" duration="3327000" />
+      <workItem from="1587094464944" duration="3330000" />
     </task>
     <servers />
   </component>
@@ -50,9 +70,45 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="223" y="68" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1585424742601" />
+    <state x="574" y="123" key="#com.intellij.ide.util.MemberChooser" timestamp="1587094502354">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="574" y="123" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1587094502354" />
     <state x="498" y="197" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1585424741432">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="498" y="197" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1536.824@0.0.1536.824" timestamp="1585424741432" />
+    <state x="549" y="155" key="FileChooserDialogImpl" timestamp="1587090821496">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="549" y="155" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1587090821496" />
+    <state width="1493" height="208" key="GridCell.Tab.0.bottom" timestamp="1587097535466">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="208" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1587097535466" />
+    <state width="1493" height="208" key="GridCell.Tab.0.center" timestamp="1587097535466">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="208" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1587097535466" />
+    <state width="1493" height="208" key="GridCell.Tab.0.left" timestamp="1587097535465">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="208" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1587097535465" />
+    <state width="1493" height="208" key="GridCell.Tab.0.right" timestamp="1587097535466">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="208" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1587097535466" />
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1586030091368">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1586030091368" />
+    <state x="209" y="34" key="new project wizard" timestamp="1587093900488">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="209" y="34" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1587093900488" />
+    <state x="809" y="194" key="run.anything.popup" timestamp="1587091810753">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="809" y="194" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1587091810753" />
   </component>
 </project>

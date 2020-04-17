@@ -65,7 +65,7 @@ public class Server {
                 //case 1 checks for the correct password and jumps to case 6 if it is incorrect, jumps to case 2 if it is
                 case 1:
                     output.writeUTF(Encrypt("Enter your password: "));//write
-                    userInput = Decrypt(input.readUTF());//read
+                    userInput = input.readUTF();//read
                     if(!AuthenticatePassword(userInput)){
                         steps = 6;
                     }else{
@@ -181,16 +181,16 @@ public class Server {
     }
 
     private void PopulateDatabase() {
-        User drStrange = new User("BestAvenger123", "Cumberb@tch", "d", 0001);
-        User drSmith = new User("SmithRulez", "password123", "d", 0002);
-        User nurseJoy = new User("Poke-Nurse", "pikachu", "n", 0003);
-        User nurseJane = new User("JaneRulez", "password123", "n", 0004);
-        Patient Will = new Patient("Will", "Brown", "1433 Country Lake Dr, Greensboro NC", "336-707-0369", 23.45, "wrbrown", "0429", "p", 1005);
-        Patient Rachel = new Patient("Rachel", "Somerville", "1435 Country Lake Dr, Greensboro NC", "336-707-0000", 12.76, "rcSomerville", "1031", "p", 1006);
-        Patient Sue = new Patient("Sue", "Brown", "1433 Country Lake Dr, Greensboro NC", "336-707-1234", 41.98, "smBrown", "Oct1990", "p", 1007);
-        Patient Bill = new Patient("Bill", "Brown", "1433 Country Lake Dr, Greensboro NC", "336-707-4321", 102.30, "brBrown", "Oct1990", "p", 1008);
-        Patient Debby = new Patient("Debby", "Somerville", "1234 Union Cross St, Rutherfordton NC", "555-555-1234", 2082.34, "dSomerville", "Apr1995", "p", 1009);
-        Patient Ed = new Patient("Ed", "Somerville", "1234 Union Cross St, Rutherfordton NC", "555-555-4321", 0.00, "eSomerville", "Apr1995", "p", 1010);
+        User drStrange = new User("BestAvenger123", "ed54b2c479f8c85bf0a8aa68b7e75b00", "d", 0001);
+        User drSmith = new User("SmithRulez", "482c811da5d5b4bc6d497ffa98491e38", "d", 0002);
+        User nurseJoy = new User("Poke-Nurse", "9ce44f88a25272b6d9cbb430ebbcfcf1", "n", 0003);
+        User nurseJane = new User("JaneRulez", "482c811da5d5b4bc6d497ffa98491e38", "n", 0004);
+        Patient Will = new Patient("Will", "Brown", "1433 Country Lake Dr, Greensboro NC", "336-707-0369", 23.45, "wrbrown", "7dfc6a6e223aeb240f43802fa9577e7a", "p", 1005);
+        Patient Rachel = new Patient("Rachel", "Somerville", "1435 Country Lake Dr, Greensboro NC", "336-707-0000", 12.76, "rcSomerville", "afdec7005cc9f14302cd0474fd0f3c96", "p", 1006);
+        Patient Sue = new Patient("Sue", "Brown", "1433 Country Lake Dr, Greensboro NC", "336-707-1234", 41.98, "smBrown", "809f97fbb4a52703c0f62d126fd64061", "p", 1007);
+        Patient Bill = new Patient("Bill", "Brown", "1433 Country Lake Dr, Greensboro NC", "336-707-4321", 102.30, "brBrown", "809f97fbb4a52703c0f62d126fd64061", "p", 1008);
+        Patient Debby = new Patient("Debby", "Somerville", "1234 Union Cross St, Rutherfordton NC", "555-555-1234", 2082.34, "dSomerville", "3f0aeac53756a7e444be52c4aaa4539f", "p", 1009);
+        Patient Ed = new Patient("Ed", "Somerville", "1234 Union Cross St, Rutherfordton NC", "555-555-4321", 0.00, "eSomerville", "3f0aeac53756a7e444be52c4aaa4539f", "p", 1010);
         users.add(drStrange);
         users.add(drSmith);
         users.add(nurseJoy);
@@ -239,29 +239,30 @@ public class Server {
     private void AddPatient() throws IOException{
         Patient patient = new Patient();
         output.writeUTF(Encrypt("Enter the patient's first name: "));
-        patient.setFirstName(input.readUTF());
+        patient.setFirstName(Decrypt(input.readUTF()));
         output.writeUTF(Encrypt("Enter the patient's last name: "));
-        patient.setLastName(input.readUTF());
+        patient.setLastName(Decrypt(input.readUTF()));
         output.writeUTF(Encrypt("Enter the patient's address: "));
-        patient.setAddress(input.readUTF());
+        patient.setAddress(Decrypt(input.readUTF()));
         output.writeUTF(Encrypt("Enter the patient's phone number: "));
-        patient.setPhoneNumber(input.readUTF());
+        patient.setPhoneNumber(Decrypt(input.readUTF()));
         output.writeUTF(Encrypt("Enter the patient's balance: "));
-        patient.setBalance(Double.parseDouble(input.readUTF()));
+        patient.setBalance(Double.parseDouble(Decrypt(input.readUTF())));
         output.writeUTF(Encrypt("Enter the patient's username: "));
-        String name = input.readUTF();
+        String name = Decrypt(input.readUTF());
         boolean available = false;
         while(!available){
             for(int i = 0; i < users.size(); i++){
                 if(name.equals(users.get(i).getUsername())){
                     output.writeUTF(Encrypt("Username is taken, try a different username: "));
-                    name = input.readUTF();
+                    name = Decrypt(input.readUTF());
                     i = 0;
                 }else{
                     available = true;
                 }
             }
         }
+        patient.setUsername(name);
         output.writeUTF(Encrypt("Enter the patient's password: "));
         patient.setPassword(input.readUTF());
         patient.setID(1010 + IDcount);
@@ -311,7 +312,7 @@ public class Server {
     private void ShowBalance() throws IOException{
         for(int i = 0; i < patients.size(); i++){
             if(patients.get(i).getUsername().equals(currentUser.getUsername())){
-                output.writeUTF(Encrypt(dtf.format(now) + "\nCurrent balance: " + patients.get(i).getBalance()));
+                output.writeUTF(Encrypt(dtf.format(now) + "\nCurrent balance: " + patients.get(i).getBalance() + "\nLog out(o)"));
                 steps = 0;
             }
         }
