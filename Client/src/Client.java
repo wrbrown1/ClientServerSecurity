@@ -211,14 +211,14 @@ public class Client {
     {
         try {
 
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] messageDigest = md.digest(input.getBytes());
-            BigInteger no = new BigInteger(1, messageDigest);
-            String hashtext = no.toString(16);
-            while (hashtext.length() < 32) {
-                hashtext = "0" + hashtext;
+            MessageDigest md5 = MessageDigest.getInstance("MD5");
+            byte[] digest = md5.digest(input.getBytes());
+            BigInteger x = new BigInteger(1, digest);
+            String hash = x.toString(16);
+            while (hash.length() < 32) {
+                hash = "0" + hash;
             }
-            return hashtext;
+            return hash;
         }
 
         // For specifying wrong message digest algorithms
